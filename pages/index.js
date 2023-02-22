@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Product, FooterBanner, HeroBanner, Footer } from "../components";
-export default function Home() {
+import { client } from "../lib/client";
+export default function Home({ products, bannerData }) {
   return (
     <>
       <Head>
@@ -10,14 +11,27 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HeroBanner />
+      {console.log(bannerData)}
       <div className="products-heading">
         <h2>Beset Selling Products</h2>
         <p>speackers of many variations</p>
       </div>
       <div className="products-container">
-        {["product 1", "product 2"].map((product) => product)}
+        {products?.map((product) => product.name)}
       </div>
       <Footer />
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const query = '*[_type == "product]"';
+  const products = await client.fetch(query);
+
+  const bannerQuery = '*[_type == "banner]"';
+  const bannerData = await client.fetch(bannerQuery);
+
+  return {
+    props: { products, bannerData },
+  };
+};
