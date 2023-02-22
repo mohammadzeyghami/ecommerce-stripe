@@ -8,7 +8,7 @@ const Layout = ({ heroBanner }) => {
       <p className="beats-solo">Small Text</p>
       <h3>{heroBanner.midText}</h3>
       <h1>{heroBanner.largeText1}</h1>
-      <img src={urlFor(heroBanner.image)} />
+      <img src={urlFor(heroBanner.image)} alt="imageee" />
       <Link href={`/product/${heroBanner.product}`}>
         <button type="button">{heroBanner.buttonText}</button>
       </Link>
