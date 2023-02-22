@@ -12,7 +12,7 @@ const Layout = ({ heroBanner }) => {
       <Link href={`/product/${heroBanner.product}`}>
         <button type="button">{heroBanner.buttonText}</button>
       </Link>
-      {/* test ssssssssssssssssss*/}
+      {/* test ssssssssssssssssssssssssss*/}
     </div>
   );
 };
