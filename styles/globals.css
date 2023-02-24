@@ -127,6 +127,11 @@ span.text-red {
   margin-top: 6px;
   color: black;
 }
+.hero-banner-wrapper {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .hero-banner-container {
   padding: 100px 40px;
