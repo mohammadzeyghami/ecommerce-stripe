@@ -11,7 +11,6 @@ export default function Home({ products, bannerData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Herobanner heroBanner={bannerData.length && bannerData[0]} />
-      {console.log(bannerData)}
       <div className="products-heading">
         <h2>Beset Selling Products</h2>
         <p>speackers of many variations</p>
@@ -21,7 +20,8 @@ export default function Home({ products, bannerData }) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <Footer FooterBanner={bannerData && bannerData[0]} />
+      {console.log(bannerData)}
+      <FooterBanner FooterBanner={bannerData && bannerData[0]} />
     </>
   );
 }

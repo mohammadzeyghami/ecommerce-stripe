@@ -1,7 +1,8 @@
 import React from "react";
-import Navbar from ".";
+import { Navbar, Footer } from ".";
+import Head from "next/head";
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
     <div className="layout">
       <Head>
@@ -10,6 +11,10 @@ const Layout = () => {
       <header>
         <Navbar />
       </header>
+      <main className="main-container">{children}</main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };
