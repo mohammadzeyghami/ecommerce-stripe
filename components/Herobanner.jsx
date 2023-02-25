@@ -1,11 +1,10 @@
 import React from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 import { urlFor } from "../lib/client";
-
-const HeroBanner = ({ heroBanner }) => {
+const Layout = ({ heroBanner }) => {
   return (
-    <div className="hero-banner-container">
+    <div className="hero-banner-container ">
       <div className="hero-banner-wrapper">
         <p className="beats-solo">{heroBanner.smallText}</p>
         <h3>{heroBanner.midText}</h3>
@@ -30,4 +29,4 @@ const HeroBanner = ({ heroBanner }) => {
   );
 };
 
-export default HeroBanner;
+export default Layout;
