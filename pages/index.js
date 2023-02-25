@@ -20,7 +20,7 @@ export default function Home({ products, bannerData }) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      {console.log(bannerData)}
+
       <FooterBanner FooterBanner={bannerData && bannerData[0]} />
     </>
   );
