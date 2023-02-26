@@ -2,41 +2,60 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 const Context = createContext();
+
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(null);
-  const [totalQuantities, setTotalQuantites] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+
   let foundProduct;
   let index;
+
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
-      //i check is product in cart or not
     );
 
     setTotalPrice(
-      (pervTotalPrice) => pervTotalPrice + product.price * quantity
+      (prevTotalPrice) => prevTotalPrice + product.price * quantity
     );
-    setTotalQuantites(
-      (pervTotalQuantities) => pervTotalQuantities + product.quantity
-    );
+    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
     if (checkProductInCart) {
-      // here checkProduct is true means that product already in side cart so we increase that
       const updatedCartItems = cartItems.map((cartProduct) => {
         if (cartProduct._id === product._id)
-          return { ...cartProduct, quantity: cartProduct.quantity + quantity };
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + quantity,
+          };
       });
+
       setCartItems(updatedCartItems);
     } else {
-      // else i add that to cart
       product.quantity = quantity;
+
       setCartItems([...cartItems, { ...product }]);
     }
-    //popup
+
     toast.success(`${qty} ${product.name} added to the cart.`);
   };
+
+  const onRemove = (product) => {
+    foundProduct = cartItems.find((item) => item._id === product._id);
+    const newCartItems = cartItems.filter((item) => item._id !== product._id);
+
+    setTotalPrice(
+      (prevTotalPrice) =>
+        prevTotalPrice - foundProduct.price * foundProduct.quantity
+    );
+    setTotalQuantities(
+      (prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity
+    );
+    setCartItems(newCartItems);
+  };
+
   const toggleCartItemQuanitity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
     index = cartItems.findIndex((product) => product._id === id);
@@ -48,7 +67,7 @@ export const StateContext = ({ children }) => {
         { ...foundProduct, quantity: foundProduct.quantity + 1 },
       ]);
       setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
-      setTotalQuantites((prevTotalQuantities) => prevTotalQuantities + 1);
+      setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
     } else if (value === "dec") {
       if (foundProduct.quantity > 1) {
         setCartItems([
@@ -56,19 +75,23 @@ export const StateContext = ({ children }) => {
           { ...foundProduct, quantity: foundProduct.quantity - 1 },
         ]);
         setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
-        setTotalQuantites((prevTotalQuantities) => prevTotalQuantities - 1);
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
       }
     }
   };
+
   const incQty = () => {
-    setQty((pervQty) => pervQty + 1);
+    setQty((prevQty) => prevQty + 1);
   };
+
   const decQty = () => {
-    setQty((pervQty) => {
-      if (pervQty - 1 < 1) return 1;
-      return pervQty - 1;
+    setQty((prevQty) => {
+      if (prevQty - 1 < 1) return 1;
+
+      return prevQty - 1;
     });
   };
+
   return (
     <Context.Provider
       value={{
@@ -82,6 +105,10 @@ export const StateContext = ({ children }) => {
         decQty,
         onAdd,
         toggleCartItemQuanitity,
+        onRemove,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities,
       }}
     >
       {children}
@@ -90,9 +117,3 @@ export const StateContext = ({ children }) => {
 };
 
 export const useStateContext = () => useContext(Context);
-
-// 1- create context
-// 2- create StateContext
-// 3- write datas in side StateContext
-// 4- in function return Context.provider and give values={{datas}} in side that
-// 5- export Context with useContext in function
