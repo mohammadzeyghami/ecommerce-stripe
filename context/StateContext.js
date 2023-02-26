@@ -43,6 +43,7 @@ export const StateContext = ({ children }) => {
     <Context.Provider
       value={{
         showCart,
+        setShowCart,
         cartItems,
         totalPrice,
         totalQuantities,
@@ -58,3 +59,9 @@ export const StateContext = ({ children }) => {
 };
 
 export const useStateContext = () => useContext(Context);
+
+// 1- create context
+// 2- create StateContext
+// 3- write datas in side StateContext
+// 4- in function return Context.provider and give values={{datas}} in side that
+// 5- export Context with useContext in function
