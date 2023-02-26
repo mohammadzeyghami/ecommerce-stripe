@@ -13,7 +13,9 @@ export const StateContext = ({ children }) => {
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
+      //i check is product in cart or not
     );
+
     setTotalPrice(
       (pervTotalPrice) => pervTotalPrice + product.price * quantity
     );
@@ -21,15 +23,18 @@ export const StateContext = ({ children }) => {
       (pervTotalQuantities) => pervTotalQuantities + product.quantity
     );
     if (checkProductInCart) {
+      // here checkProduct is true means that product already in side cart so we increase that
       const updatedCartItems = cartItems.map((cartProduct) => {
         if (cartProduct._id === product._id)
           return { ...cartProduct, quantity: cartProduct.quantity + quantity };
       });
       setCartItems(updatedCartItems);
     } else {
+      // else i add that to cart
       product.quantity = quantity;
       setCartItems([...cartItems, { ...product }]);
     }
+    //popup
     toast.success(`${qty} ${product.name} added to the cart.`);
   };
   const toggleCartItemQuanitity = (id, value) => {
@@ -76,6 +81,7 @@ export const StateContext = ({ children }) => {
         incQty,
         decQty,
         onAdd,
+        toggleCartItemQuanitity,
       }}
     >
       {children}
