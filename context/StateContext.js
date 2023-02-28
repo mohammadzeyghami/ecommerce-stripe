@@ -40,6 +40,12 @@ export const StateContext = ({ children }) => {
     }
 
     toast.success(`${qty} ${product.name} added to the cart.`);
+
+    // 1-aval miaim product ro peyda mikonim
+    // 2-totalprice ro ziad mikonim
+    // 3-totalquantities ro ziad mikonim
+    // 4-age item to marhale 1 peyda shode bod qty ro ziad mikonim
+    // 5-age jadid bod qty ro ba mahsol add mikonim to cart
   };
 
   const onRemove = (product) => {
@@ -54,6 +60,10 @@ export const StateContext = ({ children }) => {
       (prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity
     );
     setCartItems(newCartItems);
+
+    // 1- mahsol ro peyda mikonim
+    // 2- on ro filter mikonim
+    // 3- price va qty ro update mikonim va dar akhar jaygozin mikonim
   };
 
   const toggleCartItemQuanitity = (id, value) => {
