@@ -45,7 +45,7 @@ export const StateContext = ({ children }) => {
     // 2-totalprice ro ziad mikonim
     // 3-totalquantities ro ziad mikonim
     // 4-age item to marhale 1 peyda shode bod qty ro ziad mikonim
-    // 5-age jadid bod qty ro ba mahsol add mikonim to cart
+    // 5-age jadid bod qty ro ba mahsol add mikonim to cart ss
   };
 
   const onRemove = (product) => {
