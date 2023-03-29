@@ -31,7 +31,7 @@ export const StateContext = ({ children }) => {
             quantity: cartProduct.quantity + quantity,
           };
       });
-
+      // age dashtim tedad midim
       setCartItems(updatedCartItems);
     } else {
       product.quantity = quantity;
