@@ -37,6 +37,7 @@ export const StateContext = ({ children }) => {
       product.quantity = quantity;
 
       setCartItems([...cartItems, { ...product }]);
+      // age nadashtim add mikonim
     }
     console.log(cartItems);
 
