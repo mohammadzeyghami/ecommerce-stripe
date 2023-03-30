@@ -104,6 +104,7 @@ export const StateContext = ({ children }) => {
       return prevQty - 1;
     });
   };
+  // kam krdm
 
   return (
     <Context.Provider
